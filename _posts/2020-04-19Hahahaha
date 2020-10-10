@@ -1,0 +1,38 @@
+Kesimpulan Pertemuan 1
+
+Data Lake adalah sebuah muara data.
+
+Data Lake berisi berbagai macam jenis data mentah yang siap di olah untuk menjadi sebuah Informasi.
+
+Aku suka pengibaratan dari CTO Pentaho, James Dixon.
+“Data mart adalah sebotol air bersih, terkemas dan terstruktur sehingga mudah dikonsumsi, sementara data lake lebih menyerupai air dalam keadaan alaminya, data mengalir dari sungai(sistem sumber) hingga bermuara ke danau. Pengguna memiliki akses ke danau untuk memeriksa, mengambil sampel atau bahkan menyelam kedalamnya”
+
+Mulanya aku bingung, lah apa bedanya data lake dengan big data kalau seperti ini. Lalu browsing2 bentar dan nemu istilah baru, data warehouse. Nah, apa lagi itu?
+
+Hasilku nyelem di google jadi bisa membuat kesimpulan seperti ini
+
+Dari cakupan data
+Data warehouse = data lake < big data
+Jadi, data werehouse itu setingkat dengan data lake. Namun beda tingkat dengan big data. Bigdata mencakup seluruh data sedangkan data lake tidak seluas itu.
+
+Data warehouse dan data lake memiliki satu sumber data.(dari perusahaan A) sedangkan sumber data dari big data dapat berasal dari berbagai perusahaan.
+
+Contohnya nih, Instagram dalam sehari terdapat 10juta postingan foto dan Facebook dalam sehari terdapat 60juta postingan status. Dari sini data lake adalah data 10 juta di Instagram dan data 60 juta di Facebook, sedangkan bigdata mencakup data keduanya.
+
+Sudah jelas nih, data warehouse = data lake < big data -nya.
+
+Sekarang data warehouse != data lake. Nah lo beda ternyata
+
+Jadi mereka sama sama tempat muaranya data dari suatu oraganisasi tertentu.
+
+Tapi data lake menerima semua jenis data bahkan data yang kemungkinan tidak akan digunakan lagi tetep dia simpan. Sedangkan data warehouse nyimpen data yang mungkin akan digunakan. 
+
+Karna data warehouse bersifat terstruktur, jadi data yang disimpan tadi diubah formatnya dulu sebelum masuk dan disimpan, tapi data lake nyimpen data bagaimanapun format atau strukturnya, asal simpen aja, namanya juga data mentah.
+
+Sumber : 
+
+https://www.kompasiana.com/jakabonar3570/5ba36292c112fe72700419a2/perbedaan-antara-data-warehouse-data-lake?page=all 
+
+https://www.it-swarm.dev/id/database/apa-perbedaan-sebenarnya-antara-data-warehouse-big-data/1041716427/ 
+
+https://mti.binus.ac.id/2018/06/08/data-warehouse-vs-big-data/ 
