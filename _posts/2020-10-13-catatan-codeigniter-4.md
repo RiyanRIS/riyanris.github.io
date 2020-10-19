@@ -8,7 +8,7 @@ comments: true
 
 #### Migration
 
-`php spark migration:create [nama_table]`
+`php spark migrate:create [nama_table]`
 
 ```php
 <?php namespace App\Database\Migrations;
