@@ -35,8 +35,24 @@ class Peoples extends Migration
 				'constraint'     => '255',
 				'null'           => true,
 			],
+            'category_status'       => [
+                'type'              => 'ENUM',
+                'constraint'        => "'Active','Inactive'",
+                'default'           => 'Active'
+            ],
+            'product_description'   => [
+                'type'              => 'TEXT',
+                'null'              => TRUE,
+            ],
+            'create_at timestamp default current_timestamp',
+			'update_at timestamp default current_timestamp on update current_timestamp',
+			'delete_at'   => [
+				'type'     => 'datetime',
+				'null'     => TRUE,
+			],
 		]);
 		$this->forge->addKey('id', true);
+        $this->forge->addForeignKey('category_id','categories','category_id','CASCADE','CASCADE');
 		$this->forge->createTable('people');
 	}
 
@@ -48,6 +64,40 @@ class Peoples extends Migration
 	}
 }
 ```
+
+Nambah kolom baru di table yang sudah ada.
+
+`php spark migrate:create addEmail`
+
+```php
+<?php
+ 
+namespace App\Database\Migrations;
+ 
+use CodeIgniter\Database\Migration;
+ 
+class AddEmail extends Migration
+{
+    public function up()
+    {
+        $this->forge->addColumn('pegawai', [
+            'email' => [
+                'type'           => 'VARCHAR',
+                'constraint'     => '100',
+                'after'          => 'alamat'
+            ]
+        ]);
+    }
+ 
+    //--------------------------------------------------------------------
+ 
+    public function down()
+    {
+        $this->forge->dropColumn('pegawai', 'email');
+    }
+}
+```
+
 #### Seeder
 
 ref: https://iniblog.xyz/blogpost/article/87/seeder-and-faker 
