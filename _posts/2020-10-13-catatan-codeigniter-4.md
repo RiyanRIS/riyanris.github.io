@@ -6,6 +6,11 @@ tags: [codeigniter4]
 comments: true
 ---
 
+### COMPOSER
+
+`composer update --no-dev`
+
+
 #### Migration
 
 `php spark migrate:create [nama_table]`
@@ -29,16 +34,17 @@ class Peoples extends Migration
 			'nama'       => [
 				'type'           => 'VARCHAR',
 				'constraint'     => '64',
+                'unique'         => true,
 			],
 			'alamat' => [
 				'type'           => 'VARCHAR',
 				'constraint'     => '255',
 				'null'           => true,
 			],
-            'category_status'       => [
-                'type'              => 'ENUM',
-                'constraint'        => "'Active','Inactive'",
-                'default'           => 'Active'
+            'status'      => [
+                'type'           => 'ENUM',
+                'constraint'     => ['publish', 'pending', 'draft'],
+                'default'        => 'pending',
             ],
             'product_description'   => [
                 'type'              => 'TEXT',
@@ -163,6 +169,13 @@ karena jika engga gitu bakal keluar error spt ini
 
 array_keys() expects parameter 1 to be array, string given
 /var/www/html/ci4/system/Database/BaseBuilder.php - 2144
+
+![](https://i.ibb.co/2FsZRBQ/image.png)
+
+Array to string conversion
+/var/www/html/blog/system/Database/BaseBuilder.php - 2119
+
+Error disebabkan karna ada yang salah didalam $data dalam kasus saya nama field harusnya name saya tulis nama
 
 #### Faker
 
@@ -305,4 +318,122 @@ Sip.
 if ($this->session->has('message')) {
 	$dataIndex['message'] = $this->session->get('message');
 }
+```
+
+
+### TEMPLATE MODELS
+
+Copas code bawah, jan lupa ganti nama tabel
+
+nama file `Transaksi_model.php`
+
+```php
+<?php namespace App\Models;
+use CodeIgniter\Model;
+ 
+class Transaksi_model extends Model
+{
+    protected $table = 'transaksi';
+
+    public function getSql($sql){
+        return $this->db->query($sql)->getResultArray();
+    }
+     
+    public function getTransaksi($id = false)
+    {
+        if($id === false){
+            return $this->findAll();
+        }else{
+            return $this->getWhere(['id' => $id]);
+        }
+    }
+
+    public function simpan($data){
+        $query = $this->db->table($this->table)->insert($data);
+        return $query;
+    }
+
+    public function ubah($data, $id)
+    {
+        $query = $this->db->table($this->table)->update($data, array('id' => $id));
+        return $query;
+    }
+
+    public function hapus($id)
+    {
+        $query = $this->db->table($this->table)->delete(array('id' => $id));
+        return $query;
+    } 
+ 
+}
+```
+
+
+### TEMPLATE CONTROLLER
+
+```php
+<?php namespace App\Controllers;
+ 
+use CodeIgniter\Controller;
+use App\Models\Admin_model;
+ 
+class Admin extends Controller
+{
+    private $adminM;
+
+    public function __construct(){
+        $this->adminM = new Admin_model();
+    }
+
+    public function index()
+    {
+        $data['admin'] = $this->adminM->getAdmin();
+        echo view('admin',$data);
+    }
+}
+```
+
+### TEMPLATE INSERT UPDATE
+
+```php
+public function aksi(){
+        if($this->request->getPost('status')=="tambah"){
+            $pw = password_hash($this->request->getPost('password'),PASSWORD_DEFAULT);
+            $data = array(
+                'nama'  => $this->request->getPost('nama'),
+                'username'  => $this->request->getPost('username'),
+                'password'  => $pw,
+            );
+            $status = $this->adminM->simpan($data);
+            session()->setFlashdata('info', 'Berhasil menyimpan data');
+        }elseif($this->request->getPost('status')=="ubah"){
+            $id = $this->request->getPost('id');
+            if(empty($this->request->getPost('password'))){
+                $data = array(
+                    'nama'  => $this->request->getPost('nama'),
+                    'username'  => $this->request->getPost('username'),
+                );
+                $status = $this->adminM->ubah($data,$id);
+            }else{
+                $pw = password_hash($this->request->getPost('password'),PASSWORD_DEFAULT);
+                $data = array(
+                    'nama'  => $this->request->getPost('nama'),
+                    'username'  => $this->request->getPost('username'),
+                    'password'  => $pw,
+                );
+                $status = $this->adminM->ubah($data,$id);
+            }
+            session()->setFlashdata('info', 'Berhasil mengubah data');
+        }else{
+            session()->setFlashdata('info', 'Terjadi Kesalahan Data');
+            return redirect()->to('/admin');
+            die();
+        }
+
+        if(!$status){
+            session()->setFlashdata('info', 'Gagal menyimpan data');
+        }
+        
+        return redirect()->to('/admin');
+    }
 ```
