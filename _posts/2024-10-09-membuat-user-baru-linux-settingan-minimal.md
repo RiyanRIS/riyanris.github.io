@@ -1,12 +1,13 @@
 ---
 layout: post
 title: Membuat User Baru Linux 
+subtitle: ini yang biasa saya jalankan untuk membuat user baru linux
 gh-badge: [star, fork, follow]
 tags: [linux]
 comments: true
 ---
 
-![membuat user baru linux](image.png)
+![membuat user baru linux](/uploads/20241009-lasldinli.png)
 
 ---
 
