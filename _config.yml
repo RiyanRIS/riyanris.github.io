@@ -14,17 +14,18 @@ author: riyanris
 # --- List of links in the navigation bar --- #
 
 navbar-links:
+  Home: "https://riyanris.github.io/"
   About Me: "aboutme"
-  Resources:
-    - Beautiful Jekyll: "https://beautifuljekyll.com"
-    - Learn markdown: ""
-  Author's home: "https://riyanris.my.id"
+  # Resources:
+  #   - Beautiful Jekyll: "https://beautifuljekyll.com"
+  #   - Learn markdown: ""
+  My Site: "https://riyanris.my.id"
 
 # --- Logo --- #
 
 # Image to show in the navigation bar - works best with a square image
 # Remove this parameter if you don't want an image in the navbar
-avatar: "https://riyanris.my.id/assets/images/riyan.png"
+avatar: "https://www.riyanris.my.id/images/images.jpg"
 
 # By default, the image is cut into a circle. You can disable this behaviour by setting 'round-avatar: false'
 round-avatar: true
@@ -63,7 +64,7 @@ social-network-links:
 
 # If you want to show a link to an RSS in the footer, add the site description here.
 # If you don't want to show an RSS link, remove the following line.
-rss-description: This website is a virtual proof that I'm awesome
+rss-description: Website Catatan Personal Riyan Risky
 
 # --- General options --- #
 
@@ -76,10 +77,10 @@ share-links-active:
 
 # How to display the link to your website in the footer
 # Remove this if you don't want a link in the footer
-url-pretty: "RiyanRis"
+url-pretty: "riyanris"
 
 # Excerpt word length - Truncate the excerpt of each post on the feed page to the specified number of words
-excerpt_length: 50
+excerpt_length: 70
 
 # Whether or not to show an excerpt for every blog post in the feed page
 feed_show_excerpt: true
